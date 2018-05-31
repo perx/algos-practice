@@ -86,3 +86,6 @@ var subtract=function(arr1,arr2){
 	}
 	return ans;
 };
+
+exports.add=add;
+exports.sub=subtract;
