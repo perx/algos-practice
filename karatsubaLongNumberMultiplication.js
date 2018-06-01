@@ -4,12 +4,11 @@ var karatsuba=function(a,b){
 	
 	if(a.length==1 && b.length ==1)
 		return (parseInt(a)*parseInt(b))+"";
-	a.padStart(Math.max(a.length,b.length),"0");
-	b.padStart(Math.max(a.length,b.length),"0");
 	
-	return multiply([...a],[...b]).join('');
+	return multiply([...a].map(x=>parseInt(x)),[...b].map(x=>parseInt(x))).join('');
 };
 var multiply=function(arr1,arr2){
+	//console.log(arr1,arr2);
 	if(arr1.length==1 && arr2.length ==1)
 		return [arr1[0]*arr2[0]];
 	
@@ -24,13 +23,13 @@ var multiply=function(arr1,arr2){
 	let h=Math.floor(arr1.length/2),factor=Math.ceil(arr1.length/2);
 	let a=arr1.slice(0,h),b=arr1.slice(h);
 	let c=arr2.slice(0,h),d=arr2.slice(h);
-	console.log("half is",h);
+	//console.log("half is",h);
 	let res1=multiply(a,c);
 	let res2=multiply(b,d);
 	let res3=multiply(add(a,b),add(c,d));
 	let res4=add(res1,res2);
 	let term3=subtract(res3,res4);
-	console.log("before padding",res1,term3,res2);
+	//console.log("before padding",res1,term3,res2);
 	
 	for(let j=0;j<2*factor;j++){
 		res1.push(0);
@@ -40,7 +39,7 @@ var multiply=function(arr1,arr2){
 	for(let j=0;j<factor;j++){
 		term3.push(0);	
 	}
-	console.log("after padding",res1,term3,res2);
+	//console.log("after padding",res1,term3,res2);
 	ans=add(res1,add(res2,term3));
 	//remove padding
 	while(ans[0]==0)
