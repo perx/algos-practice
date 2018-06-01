@@ -9,8 +9,9 @@ var karatsuba=function(a,b){
 };
 var multiply=function(arr1,arr2){
 	//console.log(arr1,arr2);
-	if(arr1.length==1 && arr2.length ==1)
-		return [arr1[0]*arr2[0]];
+	if(arr1.length==1 && arr2.length ==1){
+		return [...(arr1[0]*arr2[0]).toString()].map(x=>parseInt(x));
+	}
 	
 	//padding the arrays
 	while(arr1.length>arr2.length)
